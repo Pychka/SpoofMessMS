@@ -1,0 +1,41 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "SpoofEntranceService";
+import "google/protobuf/wrappers.proto";
+package spoofEntrance;
+
+service SpoofEntrance{
+	rpc Registration (RegRequest) returns (RegResponse);
+	rpc Authentication (AuthenticationRequest) returns (Tokens);
+	rpc Authorization (AuthorizationRequest) returns (Tokens);
+}
+
+message RegRequest{
+	string name = 1;
+	string login = 2;
+	string password = 3;
+}
+
+message RegResponse{
+	bool status = 1;
+	string message = 2;
+	google.protobuf.Int64Value id = 3;
+	string refresh = 4;
+	string access = 5;
+}
+
+message AuthenticationRequest{
+	string refresh = 1;
+}
+
+message Tokens{
+	bool status = 1;
+	string message = 2;
+	string refresh = 3;
+	string access = 4;
+}
+
+message AuthorizationRequest{
+	string login = 1;
+	string password = 2;
+}

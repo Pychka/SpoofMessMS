@@ -1,0 +1,39 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "SpoofSettingsService";
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+
+package spoofSettings;
+
+service SpoofSettings{
+	rpc CreateUser(CreateUserRequest) returns (CreateUserResponse);
+	rpc GetUserInfo(GetUserRequest) returns (UserInfo);
+}
+message GetUserRequest{
+	int64 id = 1;
+}
+message UserInfo{
+	bool status = 1;
+	string message = 2;
+	string name = 3;
+	google.protobuf.Timestamp WasOnline = 4;
+	int32 MonthsBeforeDelete = 5;
+	bool SearchMe = 6;
+	bool ShowMe = 7;
+	bool ForwardMessage = 8;
+	bool InviteMe = 9;
+	bool IsDeleted = 10;
+	bool IsOnline = 11;
+}
+
+message CreateUserRequest{
+	string name = 1;
+	string login = 2;
+}
+
+message CreateUserResponse{
+	bool status = 1;
+	string message = 2;
+	google.protobuf.Int64Value id = 3;
+}
